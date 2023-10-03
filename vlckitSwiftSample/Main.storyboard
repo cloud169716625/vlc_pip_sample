@@ -120,6 +120,26 @@
                                     <action selector="pipToggleButtonTapped" destination="yq2-XP-ffT" eventType="touchUpInside" id="Q6n-bw-yGZ"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1F2-Bg-8nE">
+                                <rect key="frame" x="16" y="319" width="288" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="yq2-XP-ffT" id="dzu-Pg-YDF"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpd-6h-v6a">
+                                <rect key="frame" x="122.5" y="374" width="75" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="3kd-nF-3f0"/>
+                                    <constraint firstAttribute="height" constant="35" id="jpz-uD-f8z"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Add Video"/>
+                                <connections>
+                                    <action selector="addURLAndPlay" destination="yq2-XP-ffT" eventType="touchUpInside" id="VD6-LO-1s4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dmc-OC-OPO"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -128,17 +148,24 @@
                             <constraint firstItem="WaC-Ij-eD7" firstAttribute="top" secondItem="Dmc-OC-OPO" secondAttribute="top" constant="10" id="6Bu-tN-JCK"/>
                             <constraint firstItem="elM-9S-SVr" firstAttribute="centerX" secondItem="Dmc-OC-OPO" secondAttribute="centerX" id="Bhn-Ey-lpd"/>
                             <constraint firstItem="yrY-OH-NC5" firstAttribute="width" secondItem="yrY-OH-NC5" secondAttribute="height" multiplier="16:9" id="EWh-vU-xwe"/>
+                            <constraint firstItem="1F2-Bg-8nE" firstAttribute="leading" secondItem="Dmc-OC-OPO" secondAttribute="leading" constant="16" id="Fnh-CW-K9O"/>
                             <constraint firstItem="Dmc-OC-OPO" firstAttribute="trailing" secondItem="yrY-OH-NC5" secondAttribute="trailing" id="JwG-j7-g4w"/>
                             <constraint firstItem="WaC-Ij-eD7" firstAttribute="leading" secondItem="Dmc-OC-OPO" secondAttribute="leading" id="PwC-Mj-GkL"/>
+                            <constraint firstItem="Dmc-OC-OPO" firstAttribute="trailing" secondItem="1F2-Bg-8nE" secondAttribute="trailing" constant="16" id="WxW-rn-fDb"/>
                             <constraint firstItem="WaC-Ij-eD7" firstAttribute="trailing" secondItem="Dmc-OC-OPO" secondAttribute="trailing" id="ihf-aC-YRA"/>
                             <constraint firstItem="elM-9S-SVr" firstAttribute="top" secondItem="WaC-Ij-eD7" secondAttribute="bottom" constant="15" id="kIE-w7-q1G"/>
+                            <constraint firstItem="1F2-Bg-8nE" firstAttribute="top" secondItem="elM-9S-SVr" secondAttribute="bottom" constant="20" id="nZh-Ya-N7i"/>
+                            <constraint firstItem="Qpd-6h-v6a" firstAttribute="centerX" secondItem="1F2-Bg-8nE" secondAttribute="centerX" id="rEN-xk-avi"/>
                             <constraint firstItem="yrY-OH-NC5" firstAttribute="leading" secondItem="Dmc-OC-OPO" secondAttribute="leading" id="rVA-u2-rQp"/>
+                            <constraint firstItem="Qpd-6h-v6a" firstAttribute="top" secondItem="1F2-Bg-8nE" secondAttribute="bottom" constant="21" id="vws-q5-FEG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addURLBtn" destination="Qpd-6h-v6a" id="2ZI-Zy-GrQ"/>
                         <outlet property="movieView" destination="yrY-OH-NC5" id="8oJ-nz-tpV"/>
                         <outlet property="pipToggleButton" destination="elM-9S-SVr" id="ZyB-Lt-EJl"/>
                         <outlet property="playerView" destination="WaC-Ij-eD7" id="ebb-KY-jeO"/>
+                        <outlet property="urlTxt" destination="1F2-Bg-8nE" id="abz-Au-yQ3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I6N-OK-e1R" userLabel="First Responder" sceneMemberID="firstResponder"/>

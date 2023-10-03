@@ -22,6 +22,8 @@ class CustomPlayerViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var movieView: UIView!
     @IBOutlet weak var pipToggleButton: UIButton!
+    @IBOutlet weak var urlTxt: UITextField!
+    @IBOutlet weak var addURLBtn: UIButton!
     
     var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()
     weak var delegate: CustomPlayerViewControllerDelegate?
@@ -43,28 +45,15 @@ class CustomPlayerViewController: UIViewController {
         } else {
             print("unsupported")
         }
-                        
-        self.setupAV()
-        self.setupVLC()
-        
-        setupPictureInPicture()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mediaPlayer.play()
-        mediaPlayer.audio.volume = 0
-        player?.play()
+        
     }
     
-    func setupAV() {
-        guard let path = Bundle.main.path(forResource: "BigBuckBunny", ofType:"mp4") else {
-            debugPrint("video.mp4 not found")
-            return
-        }
-        
-        let url = URL(fileURLWithPath: path)
-        
+    func setupAV(url: URL) {
+                
         let playerItem = AVPlayerItem(url: url)
         
         self.player = AVQueuePlayer(items: [playerItem])
@@ -72,15 +61,8 @@ class CustomPlayerViewController: UIViewController {
     }
     
     // - VLCMediaPlayer
-    func setupVLC() {
-        
-        guard let path = Bundle.main.path(forResource: "BigBuckBunny", ofType:"mp4") else {
-            debugPrint("video.mp4 not found")
-            return
-        }
-        
-        let url = URL(fileURLWithPath: path)
-
+    func setupVLC(url: URL) {
+                
         let media = VLCMedia(url: url)
 
         // Set media options
@@ -94,6 +76,11 @@ class CustomPlayerViewController: UIViewController {
         mediaPlayer.media = media
         mediaPlayer.delegate = self
         mediaPlayer.drawable = self.movieView
+    }
+    
+    func setupVideo(url: URL) {
+        setupAV(url: url)
+        setupVLC(url: url)
     }
     
     // https://developer.apple.com/documentation/avkit/adopting_picture_in_picture_in_a_custom_player
@@ -145,6 +132,30 @@ class CustomPlayerViewController: UIViewController {
         }
     }
     
+    @IBAction func addURLAndPlay() {
+        guard let urltxt = self.urlTxt.text else {
+            return
+        }
+        
+        guard let url = URL(string: urltxt) else {
+            return
+        }
+        
+        self.setupVideo(url: url)
+        setupPictureInPicture()
+        
+        mediaPlayer.play()
+        mediaPlayer.audio.volume = 0
+        movieView.isHidden = true
+        player?.play()
+    }
+    
+}
+
+extension CustomPlayerViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.becomeFirstResponder()
+    }
 }
 
 // MARK: - AVPictureInPictureControllerDelegate
