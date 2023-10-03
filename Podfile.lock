@@ -1,0 +1,20 @@
+PODS:
+  - MobileVLCKit (3.3.17)
+  - PiPhone (1.0.1)
+
+DEPENDENCIES:
+  - MobileVLCKit (~> 3.3.0)
+  - PiPhone
+
+SPEC REPOS:
+  trunk:
+    - MobileVLCKit
+    - PiPhone
+
+SPEC CHECKSUMS:
+  MobileVLCKit: c5dd1b0ae933dc9c2348099840e753496dcdd908
+  PiPhone: 580aacde4e54e466bafa49803e993cb2ed1b6a2b
+
+PODFILE CHECKSUM: b46ccce104f057b78b86f1d6aa46fb677f82fd7c
+
+COCOAPODS: 1.13.0
