@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVKit
 import AVFoundation
 
 @UIApplicationMain
@@ -16,16 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        let audioSession = AVAudioSession.sharedInstance()
-//         do {
-//             try audioSession.setCategory("playback")
-//             try audioSession.setActive(true, with: [])
-//         } catch {
-//             print("Setting category to AVAudioSessionCategoryPlayback failed.")
-//         }
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do {            
+            try audioSession.setCategory(AVAudioSession.Category.playback)
+        } catch  {
+            print("Audio session failed")
+        }
         
         return true
     }

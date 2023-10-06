@@ -45,11 +45,14 @@ class CustomPlayerViewController: UIViewController {
         } else {
             print("unsupported")
         }
+        
+        self.urlTxt.text = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+//        self.urlTxt.text = "rtsp://35.171.173.241:65311/remmied"
+//        self.urlTxt.text = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
     
     func setupAV(url: URL) {
@@ -154,7 +157,7 @@ class CustomPlayerViewController: UIViewController {
 
 extension CustomPlayerViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.becomeFirstResponder()
+        return textField.resignFirstResponder()
     }
 }
 
@@ -171,7 +174,7 @@ extension CustomPlayerViewController: AVPictureInPictureControllerDelegate {
         self.playerView.isHidden = false
     }
     
-    func picture(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
         
         self.movieView.isHidden = false
         self.playerView.isHidden = false

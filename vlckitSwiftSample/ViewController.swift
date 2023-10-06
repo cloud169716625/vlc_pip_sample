@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import PiPhone
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -27,6 +28,8 @@ class ViewController: UIViewController {
         
         return viewController
     }
+    
+    var playerController : AVPlayerViewController!
     
     @IBOutlet var containerView: UIView!
     @IBOutlet var pickerView: UIPickerView!
@@ -71,11 +74,36 @@ class ViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func avPlayerViewControllerButtonTapped() {
-        let controller = AVPlayerViewController()
-        controller.delegate = self
-        controller.player = constructPlayer()
         
-        present(controller, animated: true, completion: nil)
+        guard let path = Bundle.main.path(forResource: "BigBuckBunny", ofType:"mp4") else {
+            debugPrint("video.mp4 not found")
+            return
+        }
+        
+        let url = URL(fileURLWithPath: path)
+        
+        let player = AVPlayer(url: url)
+        
+        playerController = AVPlayerViewController()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didfinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        
+        playerController.player = player
+        
+        playerController.allowsPictureInPicturePlayback = true
+        
+        playerController.delegate = self
+        
+        playerController.player?.play()
+        
+        self.present(playerController, animated: true, completion : nil)
+    }
+    
+    @objc func didfinishPlaying(note : NSNotification)  {
+        playerController.dismiss(animated: true, completion: nil)
+        let alertView = UIAlertController(title: "Finished", message: "Video finished", preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Okey", style: .default, handler: nil))
+        self.present(alertView, animated: true, completion: nil)
     }
 
     @IBAction func switchValueChanged(_ switchView: UISwitch) {
@@ -136,7 +164,7 @@ extension ViewController: CustomPlayerViewControllerDelegate {
     
     func customPlayerViewController(_ customPlayerViewController: CustomPlayerViewController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
         
-        if navigationController!.viewControllers.index(of: customPlayerViewController) != nil {
+        if navigationController!.viewControllers.firstIndex(of: customPlayerViewController) != nil {
             completionHandler(true)
         } else {
             navigationController!.pushViewController(customPlayerViewController, animated: true)
