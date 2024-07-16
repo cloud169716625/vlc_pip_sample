@@ -1,3 +1,4 @@
+This project is tested with BrowserStack.
 # vlckitSwiftSample
 Sample MobileVLCKit project using Swift 4
 
